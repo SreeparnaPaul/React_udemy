@@ -12,9 +12,22 @@ const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(()=>{
-    setFormIsValid(
-      enteredEmail.includes('@') && enteredPassword.trim().length > 6
-    );
+    console.log("Effect running");
+    return ()=>{
+      console.log("Effect cleanup");
+    }
+  },[])
+  
+  useEffect(()=>{
+    const identifier = setTimeout(()=>{
+      setFormIsValid(
+        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+      );
+    },500)
+    return ()=>{
+      console.log("cleanup");
+      clearTimeout(identifier);
+    }//cleanup function--> it runs before every side effect function execution
   },[enteredEmail,enteredPassword])
 
   const emailChangeHandler = (event) => {
