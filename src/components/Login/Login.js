@@ -18,20 +18,23 @@ const Login = (props) => {
     }
   },[])
   
-  useEffect(()=>{
-    const identifier = setTimeout(()=>{
-      setFormIsValid(
-        enteredEmail.includes('@') && enteredPassword.trim().length > 6
-      );
-    },500)
-    return ()=>{
-      console.log("cleanup");
-      clearTimeout(identifier);
-    }//cleanup function--> it runs before every side effect function execution
-  },[enteredEmail,enteredPassword])
+  // useEffect(()=>{
+  //   const identifier = setTimeout(()=>{
+  //     setFormIsValid(
+  //       enteredEmail.includes('@') && enteredPassword.trim().length > 6
+  //     );
+  //   },500)
+  //   return ()=>{
+  //     console.log("cleanup");
+  //     clearTimeout(identifier);
+  //   }//cleanup function--> it runs before every side effect function execution
+  // },[enteredEmail,enteredPassword])
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
+    setFormIsValid(
+      enteredEmail.includes('@') && enteredPassword.trim().length > 6
+    );
   };
 
   const passwordChangeHandler = (event) => {
